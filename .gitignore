@@ -1,16 +1,8 @@
-# Compiled class file
+# === Archivos de Compilación y Paquetes ===
 *.class
-
-# Log files
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+unimagTienda/target/
+build/
 *.jar
 *.war
 *.nar
@@ -19,11 +11,7 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-
-# Maven
-unimagTienda/target/
+# === Maven ===
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -32,25 +20,38 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
-# https://github.com/github/gitignore/blob/main/community/Java/Maven.gitignore#L27
-# Java Wrapper
 !/.mvn/wrapper/maven-wrapper.jar
 
-# IntelliJ IDEA
+# === IntelliJ IDEA ===
 .idea/
 *.iml
 *.iws
+*.ipr
 out/
 
-# Eclipse
-.settings/
-.project
-.classpath
-.factorypath
-
-# VS Code
+# === VS Code ===
 .vscode/
 
-# OS generated files
+# === STS / Eclipse ===
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+# === NetBeans ===
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# === Otros ===
 .DS_Store
 Thumbs.db
+HELP.md
+
+# Documentación específica
+Taller_Ecommerce_Tienda_Universitaria.docx
