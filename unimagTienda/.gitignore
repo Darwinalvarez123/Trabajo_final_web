@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignore Taller document
+Taller_Ecommerce_Tienda_Universitaria.docx
