@@ -9,6 +9,8 @@ import java.util.List;
 
 @Repository
 public interface OrderStatusHistoryRepository extends JpaRepository<OrderStatusHistory, Long> {
-    List<OrderStatusHistory> findByOrderId(Long orderId);
+
+    List<OrderStatusHistory> findByOrderIdOrderByChangedAtAsc(Long orderId);
+
     List<OrderStatusHistory> findByStatus(OrderStatus status);
 }
