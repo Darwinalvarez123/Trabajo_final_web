@@ -1,4 +1,4 @@
-package Ecomerce.Ecomerce;
+package com.tienda.unimagTienda;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
