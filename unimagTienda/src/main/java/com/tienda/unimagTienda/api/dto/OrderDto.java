@@ -13,7 +13,8 @@ public class OrderDto {
     public record CreateOrderRequest(
             @NotNull(message = "Customer ID is mandatory") Long customerId,
             @NotNull(message = "Address ID is mandatory") Long addressId,
-            @NotEmpty(message = "Order must have at least one item") @Valid List<OrderItemDto.CreateOrderItemRequest> items) implements Serializable {}
+            @NotEmpty(message = "Order must have at least one item") 
+            @Valid List<OrderItemDto.CreateOrderItemRequest> items) implements Serializable {}
 
     public record OrderResponse(
             Long id,
@@ -23,4 +24,7 @@ public class OrderDto {
             BigDecimal total,
             LocalDateTime createdAt,
             List<OrderItemDto.OrderItemResponse> items) implements Serializable {}
+
+    public record CancelOrderRequest(
+            String reason) implements Serializable {}
 }

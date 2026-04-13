@@ -42,7 +42,7 @@ class AddressServiceImplTest {
     void createAddress_shouldReturnAddressResponse() {
         // Given
         Long customerId = 1L;
-        AddressCreateRequest request = new AddressCreateRequest("123 Main St", "City", "State", "12345", "Country", customerId);
+        CreateAddressRequest request = new CreateAddressRequest("123 Main St", "City", "State", "12345", "Country", customerId);
         Customer customer = Customer.builder().id(customerId).build();
         Address addressEntity = Address.builder()
                 .street("123 Main St").city("City").state("State").postalCode("12345").country("Country").customer(customer)
@@ -74,7 +74,7 @@ class AddressServiceImplTest {
     void createAddress_shouldThrowRuntimeException_whenCustomerDoesNotExist() {
         // Given
         Long customerId = 1L;
-        AddressCreateRequest request = new AddressCreateRequest("123 Main St", "City", "State", "12345", "Country", customerId);
+        CreateAddressRequest request = new CreateAddressRequest("123 Main St", "City", "State", "12345", "Country", customerId);
 
         when(customerRepository.findById(customerId)).thenReturn(Optional.empty());
 
@@ -129,7 +129,7 @@ class AddressServiceImplTest {
         Long addressId = 1L;
         Long oldCustomerId = 1L;
         Long newCustomerId = 2L;
-        AddressCreateRequest request = new AddressCreateRequest("456 New St", "New City", "New State", "67890", "New Country", newCustomerId);
+        CreateAddressRequest request = new CreateAddressRequest("456 New St", "New City", "New State", "67890", "New Country", newCustomerId);
         
         Customer oldCustomer = Customer.builder().id(oldCustomerId).build();
         Customer newCustomer = Customer.builder().id(newCustomerId).build();
@@ -166,7 +166,7 @@ class AddressServiceImplTest {
         // Given
         Long addressId = 1L;
         Long customerId = 1L;
-        AddressCreateRequest request = new AddressCreateRequest("456 New St", "New City", "New State", "67890", "New Country", customerId);
+        CreateAddressRequest request = new CreateAddressRequest("456 New St", "New City", "New State", "67890", "New Country", customerId);
         when(addressRepository.findById(addressId)).thenReturn(Optional.empty());
 
         // When & Then
@@ -183,7 +183,7 @@ class AddressServiceImplTest {
         Long addressId = 1L;
         Long oldCustomerId = 1L;
         Long newCustomerId = 2L;
-        AddressCreateRequest request = new AddressCreateRequest("456 New St", "New City", "New State", "67890", "New Country", newCustomerId);
+        CreateAddressRequest request = new CreateAddressRequest("456 New St", "New City", "New State", "67890", "New Country", newCustomerId);
         
         Customer oldCustomer = Customer.builder().id(oldCustomerId).build();
         Address existingAddress = Address.builder()

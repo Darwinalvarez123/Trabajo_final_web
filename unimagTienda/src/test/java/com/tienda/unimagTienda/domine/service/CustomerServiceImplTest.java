@@ -37,7 +37,7 @@ class CustomerServiceImplTest {
     @Test
     void createCustomer_shouldReturnCustomerResponse() {
         // Given
-        CustomerCreateRequest request = new CustomerCreateRequest("John", "Doe", "john.doe@example.com", "1234567890", CustomerStatus.ACTIVE);
+        CreateCustomerRequest request = new CreateCustomerRequest("John", "Doe", "john.doe@example.com", "1234567890", CustomerStatus.ACTIVE);
         Customer customerEntity = Customer.builder()
                 .firstName("John").lastName("Doe").email("john.doe@example.com").phone("1234567890").status(CustomerStatus.ACTIVE)
                 .build();
@@ -101,7 +101,7 @@ class CustomerServiceImplTest {
     void updateCustomer_shouldReturnUpdatedCustomerResponse_whenCustomerExists() {
         // Given
         Long customerId = 1L;
-        CustomerCreateRequest request = new CustomerCreateRequest("Jane", "Smith", "jane.smith@example.com", "0987654321", CustomerStatus.INACTIVE);
+        UpdateCustomerRequest request = new UpdateCustomerRequest("Jane", "Smith", "jane.smith@example.com", "0987654321", CustomerStatus.INACTIVE);
         Customer existingCustomer = Customer.builder()
                 .id(customerId).firstName("John").lastName("Doe").email("john.doe@example.com").phone("1234567890").status(CustomerStatus.ACTIVE)
                 .build();
@@ -132,7 +132,7 @@ class CustomerServiceImplTest {
     void updateCustomer_shouldThrowRuntimeException_whenCustomerDoesNotExist() {
         // Given
         Long customerId = 1L;
-        CustomerCreateRequest request = new CustomerCreateRequest("Jane", "Smith", "jane.smith@example.com", "0987654321", CustomerStatus.INACTIVE);
+        UpdateCustomerRequest request = new UpdateCustomerRequest("Jane", "Smith", "jane.smith@example.com", "0987654321", CustomerStatus.INACTIVE);
         when(customerRepository.findById(customerId)).thenReturn(Optional.empty());
 
         // When & Then

@@ -30,8 +30,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderResponse create(OrderCreateRequest req) {
-        // 6.2 Regla: El cliente debe existir y estar activo
+    public OrderResponse create(CreateOrderRequest req) {
         Customer customer = customerRepository.findById(req.customerId())
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
         
@@ -39,7 +38,6 @@ public class OrderServiceImpl implements OrderService {
             throw new RuntimeException("Inactive customers cannot create orders");
         }
 
-        // 6.2 Regla: Dirección de envío debe pertenecer al cliente
         Address address = addressRepository.findById(req.addressId())
                 .orElseThrow(() -> new RuntimeException("Address not found"));
         
@@ -47,7 +45,6 @@ public class OrderServiceImpl implements OrderService {
             throw new RuntimeException("Shipping address does not belong to the selected customer");
         }
 
-        // 6.2 Regla: Al menos un ítem
         if (req.items() == null || req.items().isEmpty()) {
             throw new RuntimeException("Order must have at least one item");
         }
@@ -55,18 +52,16 @@ public class OrderServiceImpl implements OrderService {
         Order order = Order.builder()
                 .customer(customer)
                 .shippingAddress(address)
-                .status(OrderStatus.CREATED) // 6.2 Regla: Estado inicial CREATED
+                .status(OrderStatus.CREATED)
                 .total(BigDecimal.ZERO)
                 .build();
 
         BigDecimal total = BigDecimal.ZERO;
-        for (OrderItemCreateRequest itemReq : req.items()) {
-            // 6.2 Regla: Cantidades > 0
+        for (CreateOrderItemRequest itemReq : req.items()) {
             if (itemReq.quantity() <= 0) {
                 throw new RuntimeException("Item quantity must be greater than zero");
             }
 
-            // 6.2 Regla: El producto debe existir y estar activo
             Product product = productRepository.findById(itemReq.productId())
                     .orElseThrow(() -> new RuntimeException("Product not found: " + itemReq.productId()));
             
@@ -74,12 +69,11 @@ public class OrderServiceImpl implements OrderService {
                 throw new RuntimeException("Product is not active: " + product.getName());
             }
 
-            // 6.2 Regla: Subtotal e ítem
             OrderItem item = OrderItem.builder()
                     .order(order)
                     .product(product)
                     .quantity(itemReq.quantity())
-                    .unitPrice(product.getPrice()) // Precio capturado al crear el pedido
+                    .unitPrice(product.getPrice())
                     .subtotal(product.getPrice().multiply(BigDecimal.valueOf(itemReq.quantity())))
                     .build();
 
@@ -87,7 +81,7 @@ public class OrderServiceImpl implements OrderService {
             total = total.add(item.getSubtotal());
         }
 
-        order.setTotal(total); // 6.2 Regla: Total se calcula automáticamente
+        order.setTotal(total);
         order = orderRepository.save(order);
 
         orderStatusHistoryService.addHistory(order.getId(), "Order created successfully");
@@ -101,12 +95,10 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
 
-        // 6.3 Regla: Solo de CREATED a PAID
         if (order.getStatus() != OrderStatus.CREATED) {
             throw new RuntimeException("Only orders in CREATED status can be paid");
         }
 
-        // 6.3 Regla: Validar y descontar stock antes de pasar a PAID
         for (OrderItem item : order.getItems()) {
             inventoryService.updateStock(new UpdateStockRequest(item.getProduct().getId(), -item.getQuantity()));
         }
@@ -125,7 +117,6 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
 
-        // 6.4 Regla: Solo de PAID a SHIPPED
         if (order.getStatus() != OrderStatus.PAID) {
             throw new RuntimeException("Only PAID orders can be shipped");
         }
@@ -144,7 +135,6 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
 
-        // 6.4 Regla: Solo de SHIPPED a DELIVERED
         if (order.getStatus() != OrderStatus.SHIPPED) {
             throw new RuntimeException("Only SHIPPED orders can be delivered");
         }
@@ -163,17 +153,10 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
 
-        // 6.5 Regla: Un pedido DELIVERED no puede cancelarse.
-        if (order.getStatus() == OrderStatus.DELIVERED) {
-            throw new RuntimeException("Delivered orders cannot be cancelled");
-        }
-        
-        // 6.5 Regla: Un pedido SHIPPED no se puede cancelar si es la regla.
-        if (order.getStatus() == OrderStatus.SHIPPED) {
-             throw new RuntimeException("Shipped orders cannot be cancelled");
+        if (order.getStatus() == OrderStatus.DELIVERED || order.getStatus() == OrderStatus.SHIPPED) {
+            throw new RuntimeException("Orders in " + order.getStatus() + " status cannot be cancelled");
         }
 
-        // 6.5 Regla: Reversión de stock si ya estaba pagado.
         if (order.getStatus() == OrderStatus.PAID) {
             for (OrderItem item : order.getItems()) {
                 inventoryService.updateStock(new UpdateStockRequest(item.getProduct().getId(), item.getQuantity()));

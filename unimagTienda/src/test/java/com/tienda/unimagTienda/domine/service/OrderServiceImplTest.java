@@ -63,8 +63,8 @@ class OrderServiceImplTest {
         Integer quantity = 2;
         BigDecimal price = new BigDecimal("100.00");
         
-        OrderItemCreateRequest itemReq = new OrderItemCreateRequest(productId, quantity);
-        OrderCreateRequest request = new OrderCreateRequest(customerId, addressId, Arrays.asList(itemReq));
+        CreateOrderItemRequest itemReq = new CreateOrderItemRequest(productId, quantity);
+        CreateOrderRequest request = new CreateOrderRequest(customerId, addressId, Arrays.asList(itemReq));
 
         Customer customer = Customer.builder().id(customerId).status(CustomerStatus.ACTIVE).build();
         Address address = Address.builder().id(addressId).customer(customer).build();
@@ -98,7 +98,7 @@ class OrderServiceImplTest {
     void createOrder_shouldThrow_whenCustomerDoesNotExist() {
         // Given
         Long customerId = 1L;
-        OrderCreateRequest request = new OrderCreateRequest(customerId, 1L, null);
+        CreateOrderRequest request = new CreateOrderRequest(customerId, 1L, null);
         when(customerRepository.findById(customerId)).thenReturn(Optional.empty());
 
         // When & Then
@@ -113,8 +113,8 @@ class OrderServiceImplTest {
         Long customerId = 1L;
         Long addressId = 1L;
         Long productId = 1L;
-        OrderItemCreateRequest itemReq = new OrderItemCreateRequest(productId, 2);
-        OrderCreateRequest request = new OrderCreateRequest(customerId, addressId, Arrays.asList(itemReq));
+        CreateOrderItemRequest itemReq = new CreateOrderItemRequest(productId, 2);
+        CreateOrderRequest request = new CreateOrderRequest(customerId, addressId, Arrays.asList(itemReq));
 
         Customer customer = Customer.builder().id(customerId).status(CustomerStatus.ACTIVE).build();
         Address address = Address.builder().id(addressId).customer(customer).build();

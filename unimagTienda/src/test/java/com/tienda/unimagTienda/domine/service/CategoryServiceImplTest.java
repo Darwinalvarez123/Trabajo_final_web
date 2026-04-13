@@ -36,7 +36,7 @@ class CategoryServiceImplTest {
     @Test
     void createCategory_shouldReturnCategoryResponse_whenNameIsUnique() {
         // Given
-        CategoryCreateRequest request = new CategoryCreateRequest("Electronics", "Electronic devices");
+        CreateCategoryRequest request = new CreateCategoryRequest("Electronics", "Electronic devices");
         Category categoryEntity = Category.builder().name("Electronics").description("Electronic devices").build();
         Category savedCategoryEntity = Category.builder().id(1L).name("Electronics").description("Electronic devices").build();
         CategoryResponse expectedResponse = new CategoryResponse(1L, "Electronics", "Electronic devices");
@@ -62,7 +62,7 @@ class CategoryServiceImplTest {
     @Test
     void createCategory_shouldThrowRuntimeException_whenNameAlreadyExists() {
         // Given
-        CategoryCreateRequest request = new CategoryCreateRequest("Electronics", "Description");
+        CreateCategoryRequest request = new CreateCategoryRequest("Electronics", "Description");
         when(categoryRepository.findByName(request.name())).thenReturn(Optional.of(new Category()));
 
         // When & Then
@@ -110,7 +110,7 @@ class CategoryServiceImplTest {
     void updateCategory_shouldReturnUpdatedCategoryResponse_whenNameIsUnique() {
         // Given
         Long id = 1L;
-        CategoryCreateRequest request = new CategoryCreateRequest("New Name", "New Description");
+        CreateCategoryRequest request = new CreateCategoryRequest("New Name", "New Description");
         Category existingCategory = Category.builder().id(id).name("Old Name").description("Old Description").build();
         Category savedCategory = Category.builder().id(id).name("New Name").description("New Description").build();
         CategoryResponse expectedResponse = new CategoryResponse(id, "New Name", "New Description");
@@ -136,7 +136,7 @@ class CategoryServiceImplTest {
     void updateCategory_shouldThrowRuntimeException_whenNewNameAlreadyExists() {
         // Given
         Long id = 1L;
-        CategoryCreateRequest request = new CategoryCreateRequest("Existing Name", "Description");
+        CreateCategoryRequest request = new CreateCategoryRequest("Existing Name", "Description");
         Category existingCategory = Category.builder().id(id).name("Old Name").build();
         Category anotherCategory = Category.builder().id(2L).name("Existing Name").build();
 

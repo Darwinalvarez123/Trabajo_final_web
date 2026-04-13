@@ -21,9 +21,11 @@ public class Inventory {
     @JoinColumn(name = "product_id", nullable = false, unique = true)
     private Product product;
 
+    @Builder.Default
     @Column(nullable = false)
     private Integer availableStock = 0;
 
+    @Builder.Default
     @Column(name = "min_stock", nullable = false)
     private Integer minStock = 0;
 

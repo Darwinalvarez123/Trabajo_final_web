@@ -43,7 +43,7 @@ class ProductServiceImplTest {
     void createProduct_shouldReturnProductResponse_whenSkuAndCategoryExist() {
         // Given
         Long categoryId = 1L;
-        ProductCreateRequest request = new ProductCreateRequest("SKU001", "Laptop", "Powerful laptop", new BigDecimal("1200.00"), categoryId);
+        CreateProductRequest request = new CreateProductRequest("SKU001", "Laptop", "Powerful laptop", new BigDecimal("1200.00"), categoryId);
         Category category = Category.builder().id(categoryId).name("Electronics").build();
         Product productEntity = Product.builder()
                 .sku("SKU001").name("Laptop").description("Powerful laptop").price(new BigDecimal("1200.00")).category(category)
@@ -77,7 +77,7 @@ class ProductServiceImplTest {
     void createProduct_shouldThrowRuntimeException_whenSkuAlreadyExists() {
         // Given
         Long categoryId = 1L;
-        ProductCreateRequest request = new ProductCreateRequest("SKU001", "Laptop", "Powerful laptop", new BigDecimal("1200.00"), categoryId);
+        CreateProductRequest request = new CreateProductRequest("SKU001", "Laptop", "Powerful laptop", new BigDecimal("1200.00"), categoryId);
         when(productRepository.findBySku(request.sku())).thenReturn(Optional.of(new Product()));
 
         // When & Then
@@ -93,7 +93,7 @@ class ProductServiceImplTest {
     void createProduct_shouldThrowRuntimeException_whenCategoryDoesNotExist() {
         // Given
         Long categoryId = 1L;
-        ProductCreateRequest request = new ProductCreateRequest("SKU001", "Laptop", "Powerful laptop", new BigDecimal("1200.00"), categoryId);
+        CreateProductRequest request = new CreateProductRequest("SKU001", "Laptop", "Powerful laptop", new BigDecimal("1200.00"), categoryId);
         when(productRepository.findBySku(request.sku())).thenReturn(Optional.empty());
         when(categoryRepository.findById(categoryId)).thenReturn(Optional.empty());
 
@@ -149,7 +149,7 @@ class ProductServiceImplTest {
         Long productId = 1L;
         Long oldCategoryId = 1L;
         Long newCategoryId = 2L;
-        ProductCreateRequest request = new ProductCreateRequest("SKU002", "Desktop", "Powerful desktop", new BigDecimal("1500.00"), newCategoryId);
+        UpdateProductRequest request = new UpdateProductRequest("SKU002", "Desktop", "Powerful desktop", new BigDecimal("1500.00"), newCategoryId);
         
         Category oldCategory = Category.builder().id(oldCategoryId).name("Electronics").build();
         Category newCategory = Category.builder().id(newCategoryId).name("Computers").build();
@@ -188,7 +188,7 @@ class ProductServiceImplTest {
         // Given
         Long productId = 1L;
         Long categoryId = 1L;
-        ProductCreateRequest request = new ProductCreateRequest("SKU002", "Desktop", "Powerful desktop", new BigDecimal("1500.00"), categoryId);
+        UpdateProductRequest request = new UpdateProductRequest("SKU002", "Desktop", "Powerful desktop", new BigDecimal("1500.00"), categoryId);
         when(productRepository.findById(productId)).thenReturn(Optional.empty());
 
         // When & Then
@@ -205,7 +205,7 @@ class ProductServiceImplTest {
         // Given
         Long productId = 1L;
         Long categoryId = 1L;
-        ProductCreateRequest request = new ProductCreateRequest("SKU002", "Desktop", "Powerful desktop", new BigDecimal("1500.00"), categoryId);
+        UpdateProductRequest request = new UpdateProductRequest("SKU002", "Desktop", "Powerful desktop", new BigDecimal("1500.00"), categoryId);
         
         Category category = Category.builder().id(categoryId).name("Electronics").build();
         Product existingProduct = Product.builder()
@@ -231,7 +231,7 @@ class ProductServiceImplTest {
         Long productId = 1L;
         Long oldCategoryId = 1L;
         Long newCategoryId = 2L;
-        ProductCreateRequest request = new ProductCreateRequest("SKU001", "Desktop", "Powerful desktop", new BigDecimal("1500.00"), newCategoryId); // SKU is same, so no SKU check
+        UpdateProductRequest request = new UpdateProductRequest("SKU001", "Desktop", "Powerful desktop", new BigDecimal("1500.00"), newCategoryId); // SKU is same, so no SKU check
         
         Category oldCategory = Category.builder().id(oldCategoryId).name("Electronics").build();
         Product existingProduct = Product.builder()
