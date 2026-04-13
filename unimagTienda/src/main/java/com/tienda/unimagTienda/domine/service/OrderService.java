@@ -4,7 +4,7 @@ import com.tienda.unimagTienda.api.dto.OrderDto.*;
 import java.util.List;
 
 public interface OrderService {
-    OrderResponse create(OrderCreateRequest req);
+    OrderResponse create(CreateOrderRequest req);
     OrderResponse get(Long id);
     List<OrderResponse> getAllByCustomerId(Long customerId);
     

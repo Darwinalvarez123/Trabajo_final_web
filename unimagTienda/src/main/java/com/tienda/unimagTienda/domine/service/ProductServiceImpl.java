@@ -23,13 +23,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ProductResponse create(ProductCreateRequest req) {
-        // Check if SKU already exists
+    public ProductResponse create(CreateProductRequest req) {
         if (productRepository.findBySku(req.sku()).isPresent()) {
             throw new RuntimeException("Product with SKU " + req.sku() + " already exists.");
         }
         
-        // Check if Category exists
         Category category = categoryRepository.findById(req.categoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found with id: " + req.categoryId()));
 
@@ -49,16 +47,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public ProductResponse update(Long id, ProductCreateRequest req) {
+    public ProductResponse update(Long id, UpdateProductRequest req) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
 
-        // Validate SKU if changed
         if (!product.getSku().equals(req.sku()) && productRepository.findBySku(req.sku()).isPresent()) {
             throw new RuntimeException("Product with SKU " + req.sku() + " already exists.");
         }
         
-        // Validate and update category if changed
         if (!product.getCategory().getId().equals(req.categoryId())) {
             Category category = categoryRepository.findById(req.categoryId())
                     .orElseThrow(() -> new RuntimeException("Category not found with id: " + req.categoryId()));
@@ -87,7 +83,6 @@ public class ProductServiceImpl implements ProductService {
     public void delete(Long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
-        // Soft delete (logical delete) by setting active to false
         product.setActive(false);
         productRepository.save(product);
     }

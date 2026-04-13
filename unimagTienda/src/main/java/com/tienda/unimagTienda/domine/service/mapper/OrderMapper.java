@@ -18,7 +18,7 @@ public interface OrderMapper {
     @Mapping(target = "statusHistory", ignore = true)
     @Mapping(target = "customer", source = "customerId")
     @Mapping(target = "shippingAddress", source = "addressId")
-    Order toEntity(OrderCreateRequest req);
+    Order toEntity(CreateOrderRequest req);
 
     @Mapping(target = "customerId", source = "customer.id")
     @Mapping(target = "addressId", source = "shippingAddress.id")

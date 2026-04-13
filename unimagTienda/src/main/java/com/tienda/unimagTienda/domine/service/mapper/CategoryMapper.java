@@ -11,7 +11,8 @@ public interface CategoryMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    Category toEntity(CategoryCreateRequest req);
+    @Mapping(target = "products", ignore = true)
+    Category toEntity(CreateCategoryRequest req);
 
     CategoryResponse toResponse(Category entity);
 }

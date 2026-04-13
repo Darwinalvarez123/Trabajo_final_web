@@ -4,9 +4,9 @@ import com.tienda.unimagTienda.api.dto.CategoryDto.*;
 import java.util.List;
 
 public interface CategoryService {
-    CategoryResponse create(CategoryCreateRequest req);
+    CategoryResponse create(CreateCategoryRequest req);
     CategoryResponse get(Long id);
-    CategoryResponse update(Long id, CategoryCreateRequest req);
+    CategoryResponse update(Long id, CreateCategoryRequest req);
     List<CategoryResponse> getAll();
     void delete(Long id);
 }

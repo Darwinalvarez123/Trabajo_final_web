@@ -14,7 +14,7 @@ public interface OrderItemMapper {
     @Mapping(target = "unitPrice", ignore = true)
     @Mapping(target = "subtotal", ignore = true)
     @Mapping(target = "product", source = "productId")
-    OrderItem toEntity(OrderItemCreateRequest req);
+    OrderItem toEntity(CreateOrderItemRequest req);
 
     @Mapping(target = "productId", source = "product.id")
     @Mapping(target = "productName", source = "product.name")

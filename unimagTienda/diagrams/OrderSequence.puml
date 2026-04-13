@@ -1,0 +1,44 @@
+@startuml
+actor Client
+participant OrderController
+participant OrderServiceImpl
+participant OrderRepository
+participant InventoryService
+participant OrderStatusHistoryService
+
+== Creación de Pedido ==
+Client -> OrderController: POST /api/orders (CreateOrderRequest)
+OrderController -> OrderServiceImpl: create(request)
+activate OrderServiceImpl
+
+OrderServiceImpl -> OrderServiceImpl: Validate Customer & Status
+OrderServiceImpl -> OrderServiceImpl: Validate Address belongs to Customer
+OrderServiceImpl -> OrderServiceImpl: Validate Products Active
+
+OrderServiceImpl -> OrderRepository: save(orderEntity)
+OrderServiceImpl -> OrderStatusHistoryService: addHistory(orderId, "Order created")
+
+OrderServiceImpl --> OrderController: OrderResponse
+deactivate OrderServiceImpl
+OrderController --> Client: 201 Created
+
+== Pago de Pedido ==
+Client -> OrderController: PUT /api/orders/{id}/pay
+OrderController -> OrderServiceImpl: pay(orderId)
+activate OrderServiceImpl
+
+OrderServiceImpl -> OrderRepository: findById(orderId)
+OrderServiceImpl -> OrderServiceImpl: Check status == CREATED
+
+loop For each OrderItem
+    OrderServiceImpl -> InventoryService: updateStock(productId, -quantity)
+    InventoryService -> InventoryService: Check stock sufficient
+end
+
+OrderServiceImpl -> OrderRepository: save(orderEntity PAID)
+OrderServiceImpl -> OrderStatusHistoryService: addHistory(orderId, "Order PAID")
+
+OrderServiceImpl --> OrderController: OrderResponse
+deactivate OrderServiceImpl
+OrderController --> Client: 200 OK
+@enduml

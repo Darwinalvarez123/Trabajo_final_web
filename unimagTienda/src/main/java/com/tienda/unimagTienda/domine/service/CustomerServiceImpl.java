@@ -20,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public CustomerResponse create(CustomerCreateRequest req) {
+    public CustomerResponse create(CreateCustomerRequest req) {
         Customer customer = customerMapper.toEntity(req);
         customer = customerRepository.save(customer);
         return customerMapper.toResponse(customer);
@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public CustomerResponse update(Long id, CustomerCreateRequest req) {
+    public CustomerResponse update(Long id, UpdateCustomerRequest req) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
         

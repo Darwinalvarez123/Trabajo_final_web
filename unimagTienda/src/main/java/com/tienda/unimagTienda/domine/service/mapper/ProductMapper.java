@@ -15,7 +15,7 @@ public interface ProductMapper {
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "inventory", ignore = true)
     @Mapping(target = "category", source = "categoryId")
-    Product toEntity(ProductCreateRequest req);
+    Product toEntity(CreateProductRequest req);
 
     @Mapping(target = "categoryId", source = "category.id")
     ProductResponse toResponse(Product entity);

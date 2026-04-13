@@ -20,8 +20,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public CategoryResponse create(CategoryCreateRequest req) {
-        // Optional: Check if a category with the same name already exists
+    public CategoryResponse create(CreateCategoryRequest req) {
         if (categoryRepository.findByName(req.name()).isPresent()) {
             throw new RuntimeException("Category with name " + req.name() + " already exists.");
         }
@@ -40,11 +39,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     @Transactional
-    public CategoryResponse update(Long id, CategoryCreateRequest req) {
+    public CategoryResponse update(Long id, CreateCategoryRequest req) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
         
-        // Optional: Check for duplicate name if name is changed
         if (!category.getName().equals(req.name()) && categoryRepository.findByName(req.name()).isPresent()) {
             throw new RuntimeException("Category with name " + req.name() + " already exists.");
         }
@@ -70,8 +68,6 @@ public class CategoryServiceImpl implements CategoryService {
         if (!categoryRepository.existsById(id)) {
             throw new RuntimeException("Category not found with id: " + id);
         }
-        // Optional: Check if category has associated products before deleting
-        // If so, decide whether to disassociate, reassign, or prevent deletion.
         categoryRepository.deleteById(id);
     }
 }

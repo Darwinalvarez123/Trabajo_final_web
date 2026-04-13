@@ -17,13 +17,12 @@ import java.util.stream.Collectors;
 public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
-    private final CustomerRepository customerRepository; // Needed to validate customer existence
+    private final CustomerRepository customerRepository;
     private final AddressMapper addressMapper;
 
     @Override
     @Transactional
-    public AddressResponse create(AddressCreateRequest req) {
-        // Validate if customer exists
+    public AddressResponse create(CreateAddressRequest req) {
         customerRepository.findById(req.customerId())
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + req.customerId()));
 
@@ -42,11 +41,10 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     @Transactional
-    public AddressResponse update(Long id, AddressCreateRequest req) {
+    public AddressResponse update(Long id, CreateAddressRequest req) {
         Address address = addressRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Address not found with id: " + id));
 
-        // Validate if customer exists if customerId is changed
         if (!address.getCustomer().getId().equals(req.customerId())) {
             customerRepository.findById(req.customerId())
                     .orElseThrow(() -> new RuntimeException("Customer not found with id: " + req.customerId()));
@@ -57,7 +55,7 @@ public class AddressServiceImpl implements AddressService {
         address.setState(req.state());
         address.setPostalCode(req.postalCode());
         address.setCountry(req.country());
-        address.getCustomer().setId(req.customerId()); // Update customer reference
+        address.getCustomer().setId(req.customerId());
         
         address = addressRepository.save(address);
         return addressMapper.toResponse(address);
@@ -66,7 +64,6 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional(readOnly = true)
     public List<AddressResponse> getAllByCustomerId(Long customerId) {
-        // Validate if customer exists
         customerRepository.findById(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + customerId));
 

@@ -4,9 +4,9 @@ import com.tienda.unimagTienda.api.dto.ProductDto.*;
 import java.util.List;
 
 public interface ProductService {
-    ProductResponse create(ProductCreateRequest req);
+    ProductResponse create(CreateProductRequest req);
     ProductResponse get(Long id);
-    ProductResponse update(Long id, ProductCreateRequest req);
+    ProductResponse update(Long id, UpdateProductRequest req);
     List<ProductResponse> getAll();
     void delete(Long id);
 }

@@ -11,7 +11,9 @@ public interface CustomerMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    Customer toEntity(CustomerCreateRequest req);
+    @Mapping(target = "addresses", ignore = true)
+    @Mapping(target = "orders", ignore = true)
+    Customer toEntity(CreateCustomerRequest req);
 
     CustomerResponse toResponse(Customer entity);
 }
