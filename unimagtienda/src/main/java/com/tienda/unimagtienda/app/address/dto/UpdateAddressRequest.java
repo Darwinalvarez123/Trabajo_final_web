@@ -1,0 +1,11 @@
+package com.tienda.unimagtienda.app.address.dto;
+
+public record UpdateAddressRequest(
+
+        String street,
+        String city,
+        String state,
+        String postalCode,
+        String country
+
+) {}
