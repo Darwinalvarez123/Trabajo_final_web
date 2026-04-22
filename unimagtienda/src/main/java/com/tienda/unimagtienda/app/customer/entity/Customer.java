@@ -30,11 +30,10 @@ public class Customer {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Builder.Default
     @Enumerated(EnumType.STRING)
     private CustomerStatus status = CustomerStatus.ACTIVE;
 
-    @Builder.Default
+
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Address> addresses = new ArrayList<>();
 
