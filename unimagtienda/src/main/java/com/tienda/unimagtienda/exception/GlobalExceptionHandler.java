@@ -85,7 +85,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
     }
 
-    // VALIDACIONES MANUALES (service layer)
+    // VALIDACIONES MANUALES (service.java layer)
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<ApiError> handleCustomValidation(
             ValidationException ex,
