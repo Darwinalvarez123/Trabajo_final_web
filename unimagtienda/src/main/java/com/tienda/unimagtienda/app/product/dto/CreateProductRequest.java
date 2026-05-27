@@ -1,6 +1,7 @@
 package com.tienda.unimagtienda.app.product.dto;
 
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -17,7 +18,7 @@ public record CreateProductRequest(
 
         String description,
         @NotNull
-        @DecimalMin(value = "0.01", message = "Price must be greater than 0")
+        @Digits(integer = 8, fraction = 2, message = "Price must have at most 8 integer digits and 2 decimal places")
         BigDecimal price,
 
         @NotNull(message = "Category is required")

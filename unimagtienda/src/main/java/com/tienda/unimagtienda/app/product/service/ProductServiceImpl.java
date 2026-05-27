@@ -12,7 +12,12 @@ import com.tienda.unimagtienda.app.product.mapper.ProductMapper;
 import com.tienda.unimagtienda.app.product.repository.ProductRepository;
 import com.tienda.unimagtienda.exception.ConflictException;
 import com.tienda.unimagtienda.exception.ResourceNotFoundException;
+import com.tienda.unimagtienda.security.domine.AppUser;
+import com.tienda.unimagtienda.security.domine.Role;
+import com.tienda.unimagtienda.security.repository.AppUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,11 +48,11 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
 
         Product product = productMapper.toEntity(req);
+
         product.setCategory(category);
         product.setActive(true);
 
         Product savedProduct = productRepository.save(product);
-
 
         Inventory inventory = Inventory.builder()
                 .product(savedProduct)
@@ -112,6 +117,8 @@ public class ProductServiceImpl implements ProductService {
             throw new ResourceNotFoundException("Product not found");
         }
 
+
+
         if (req.sku() != null &&
                 !req.sku().equals(product.getSku()) &&
                 productRepository.existsBySku(req.sku())) {
@@ -135,8 +142,12 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
-        product.setActive(false);
 
+        product.setActive(false);
         productRepository.save(product);
     }
+
+
+
+
 }

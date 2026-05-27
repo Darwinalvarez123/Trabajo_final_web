@@ -222,9 +222,7 @@ public class OrderServiceImpl implements OrderService {
         orderStatusHistoryService.register(saved, OrderStatus.CANCELLED, "Order cancelled");
     }
 
-    // =========================
-    // HISTORIAL (NUEVO)
-    // =========================
+
     @Override
     public List<OrderStatusHistoryResponse> getOrderHistory(Long orderId) {
 

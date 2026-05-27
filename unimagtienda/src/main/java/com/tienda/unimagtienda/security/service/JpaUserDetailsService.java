@@ -1,6 +1,7 @@
 package com.tienda.unimagtienda.security.service;
 
 import com.tienda.unimagtienda.security.repository.AppUserRepository;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

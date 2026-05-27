@@ -2,6 +2,7 @@ package com.tienda.unimagtienda.app.product.entity;
 
 import com.tienda.unimagtienda.app.category.entity.Category;
 import com.tienda.unimagtienda.app.inventory.entity.Inventory;
+import com.tienda.unimagtienda.security.domine.AppUser;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -188,7 +188,7 @@ class ProductServiceImplTest {
         assertThat(product.getPrice()).isEqualTo(BigDecimal.valueOf(200));
         assertThat(product.getCategory()).isEqualTo(category);
 
-        // ✔ SKU NO cambia
+        //  SKU NO cambia
         assertThat(product.getSku()).isEqualTo("OLD");
 
         verify(productRepository).save(product);

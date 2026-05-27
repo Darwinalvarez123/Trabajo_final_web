@@ -10,6 +10,12 @@ import java.util.Optional;
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
 
     Optional<Inventory> findByProductId(Long productId);
+    @Query("""
+           SELECT COUNT(i)
+           FROM Inventory i
+           WHERE i.availableStock <= i.minStock
+           """)
+    long countLowStock();
 
 }
 

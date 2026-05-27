@@ -1,16 +1,15 @@
 package com.tienda.unimagtienda.security.dto;
 
-import com.tienda.unimagtienda.security.domine.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.Set;
+import java.util.List;
 
 public class AuthDtos {
+
     public record RegisterRequest(
             @Email @NotBlank String email,
-            @NotBlank String password,
-            Set<Role> roles
+            @NotBlank String password
     ) {}
 
     public record LoginRequest(
@@ -21,6 +20,7 @@ public class AuthDtos {
     public record AuthResponse(
             String accessToken,
             String tokenType,
-            long expiresInSeconds
+            long expiresInSeconds,
+            List<String> roles
     ) {}
 }
