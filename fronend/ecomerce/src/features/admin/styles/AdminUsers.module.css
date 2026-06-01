@@ -1,0 +1,243 @@
+.adminUsersContainer {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 2rem;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, .4);
+    box-shadow:
+            0 10px 30px rgba(0,0,0,.08),
+            0 1px 8px rgba(0,0,0,.04);
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    border-radius: 2px;
+}
+
+.usersTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+
+.usersTable th,
+.usersTable td {
+    text-align: left;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.usersTable th {
+    background-color: #f9fafb;
+    font-weight: 600;
+    color: #374151;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+}
+
+.usersTable thead tr:first-child th:first-child {
+    border-top-left-radius: 16px;
+}
+.usersTable thead tr:first-child th:last-child {
+    border-top-right-radius: 16px;
+}
+.usersTable tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 16px;
+}
+.usersTable tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 16px;
+}
+
+.usersTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.usersTable tbody tr:hover {
+    background-color: #f3f4f6;
+}
+
+.roleSelect {
+    padding: 0.6rem 2.5rem 0.6rem 0.8rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: #374151;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%236B7280%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13.2-5.4H18.6c-5%200-9.3%201.8-13.2%205.4A17.6%2017.6%200%200%0A0%200%2082.6c0%204.8%201.8%209.3%205.4%2013.2l128%20128c3.9%203.9%208.4%205.8%2013.2%205.8s9.3-1.9%2013.2-5.8l128-128c3.8-3.9%205.7-8.4%205.7-13.2%200-4.8-1.9-9.3-5.7-13.2z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 0.8em;
+    box-sizing: border-box;
+}
+
+.roleSelect:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.25);
+}
+
+.actionButton {
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: inherit;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    margin-right: 0.5rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.actionButton:last-child {
+    margin-right: 0;
+}
+
+.editButton {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+}
+
+.editButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(37,99,235,.2);
+}
+
+.deleteButton {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.deleteButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(239,68,68,.2);
+}
+
+@media (max-width: 768px) {
+    .adminUsersContainer {
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .usersTable {
+        border-radius: 12px;
+    }
+
+    .usersTable th,
+    .usersTable td {
+        padding: 0.8rem 1rem;
+    }
+
+    .usersTable thead tr:first-child th:first-child {
+        border-top-left-radius: 12px;
+    }
+    .usersTable thead tr:first-child th:last-child {
+        border-top-right-radius: 12px;
+    }
+    .usersTable tbody tr:last-child td:first-child {
+        border-bottom-left-radius: 12px;
+    }
+    .usersTable tbody tr:last-child td:last-child {
+        border-bottom-right-radius: 12px;
+    }
+
+    .roleSelect {
+        padding: 0.5rem 2rem 0.5rem 0.7rem;
+        font-size: 0.8rem;
+    }
+
+    .actionButton {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+        margin-right: 0.3rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .usersTable, .usersTable thead, .usersTable tbody, .usersTable th, .usersTable td, .usersTable tr {
+        display: block;
+    }
+
+    .usersTable thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .usersTable tr {
+        border: 1px solid #e5e7eb;
+        margin-bottom: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,.03);
+        background-color: white;
+    }
+
+    .usersTable td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 1.2rem;
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    .usersTable td:last-child {
+        border-bottom: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .usersTable td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #4b5563;
+        flex-shrink: 0;
+        margin-right: 1rem;
+    }
+
+    .usersTable select {
+        width: auto;
+        flex-grow: 1;
+    }
+
+    .actionButton {
+        width: 100%;
+        margin-right: 0;
+    }
+}

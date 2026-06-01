@@ -1,0 +1,144 @@
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, .95);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, .4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .06), 0 1px 6px rgba(0, 0, 0, .03);
+    box-sizing: border-box;
+}
+
+.title {
+    color: #2563eb;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 1rem;
+}
+
+.dataGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.dataItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.dataItem label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+}
+
+.value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 1rem;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+}
+
+.buttonGroup button {
+    padding: 0.8rem 1.8rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.backButton {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+.backButton:hover {
+    background: #e5e7eb;
+    color: #1f2937;
+}
+
+.editButton {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.editButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+    filter: brightness(1.1);
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    padding: 4px 8px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    width: fit-content;
+}
+
+.counter button {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    background: #f9fafb;
+    color: #2563eb;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.counter button:hover {
+    background: #2563eb;
+    color: white;
+}
+
+.counter span {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111827;
+    min-width: 2.5rem;
+    text-align: center;
+}
+
+.progressContainer {
+    width: 100%;
+    height: 12px;
+    background-color: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progressBar {
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+}
+
+.barSafe { background: linear-gradient(135deg, #10b981, #059669); }
+.barWarning { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.barDanger { background: linear-gradient(135deg, #ef4444, #dc2626); }

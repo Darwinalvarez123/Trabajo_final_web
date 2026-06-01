@@ -1,0 +1,22 @@
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 2.5rem;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.title {
+    color: #1f2937;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
+}

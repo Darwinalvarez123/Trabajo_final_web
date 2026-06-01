@@ -1,0 +1,95 @@
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #111827;
+}
+
+.addressCard {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 1.5rem 2rem;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, .4);
+    box-shadow:
+            0 8px 24px rgba(0,0,0,.06),
+            0 1px 6px rgba(0,0,0,.03);
+    transition: all .2s ease;
+    margin-bottom: 2rem;
+}
+
+.addressCard:hover {
+    transform: translateY(-4px);
+    box-shadow:
+            0 12px 28px rgba(0,0,0,.09),
+            0 2px 8px rgba(0,0,0,.05);
+}
+
+.addressCard p {
+    font-size: 1.1rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.addressCard strong {
+    color: #2563eb;
+    font-weight: 700;
+    margin-right: 0.5rem;
+}
+
+.viewOtherButton {
+    display: block;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: .25s;
+    box-shadow: 0 6px 16px rgba(22,163,74,.25);
+    max-width: 250px;
+    box-sizing: border-box;
+}
+
+.viewOtherButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(22,163,74,.35);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .addressCard {
+        padding: 1rem 1.2rem;
+    }
+
+    .addressCard p {
+        font-size: 1rem;
+    }
+
+    .viewOtherButton {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}

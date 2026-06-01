@@ -1,0 +1,113 @@
+.adminDashboardContainer {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 2rem;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, .4);
+    box-shadow:
+            0 10px 30px rgba(0,0,0,.08),
+            0 1px 8px rgba(0,0,0,.04);
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    border-radius: 2px;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.statCard {
+    background-color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 150px;
+    box-sizing: border-box;
+}
+
+.statCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.1);
+}
+
+.statCard h3 {
+    font-size: 1.1rem;
+    color: #4b5563;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.statCard p {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1;
+    margin-top: auto;
+}
+
+.statCard.totalUsers p { color: #2563eb; }
+.statCard.totalAdmins p { color: #dc2626; }
+.statCard.totalNormalUsers p { color: #f59e0b; }
+.statCard.totalProducts p { color: #10b981; }
+.statCard.lowStockProducts p { color: #ef4444; }
+
+@media (max-width: 768px) {
+    .adminDashboardContainer {
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .statsGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .statCard {
+        padding: 1.2rem;
+        min-height: 120px;
+    }
+
+    .statCard h3 {
+        font-size: 1rem;
+    }
+
+    .statCard p {
+        font-size: 2.2rem;
+    }
+}

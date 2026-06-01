@@ -1,0 +1,130 @@
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.title {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.orderList {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.orderCard {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.orderCard h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.orderCard p {
+    margin: 5px 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+.orderCard strong {
+    color: #333;
+}
+
+.detailsButton {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: inherit;
+    margin-top: 10px;
+    align-self: flex-end;
+}
+
+.detailsButton:hover {
+    background-color: #0056b3;
+}
+
+.error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    text-align: center;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.statusCreated {
+    background-color: #ffc107;
+    color: #343a40;
+}
+
+.statusPaid {
+    background-color: #28a745;
+    color: white;
+}
+
+.statusShipped {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.statusDelivered {
+    background-color: #007bff;
+    color: white;
+}
+
+.statusCancelled {
+    background-color: #dc3545;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .orderList {
+        grid-template-columns: 1fr;
+    }
+}
